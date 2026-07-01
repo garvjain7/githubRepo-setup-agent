@@ -1,0 +1,64 @@
+repo-setup-agent/
+│
+├── app/
+│   ├── main.py
+│   ├── config.py
+│   ├── dependencies.py
+│   │
+│   ├── api/
+│   │   ├── routes.py
+│   │   ├── repository.py
+│   │   ├── chat.py
+│   │   └── websocket.py
+│   │
+│   ├── agent/
+│   │   ├── orchestrator.py
+│   │   ├── prompt_builder.py
+│   │   ├── tool_executor.py
+│   │   └── system_prompt.py
+│   │
+│   ├── repository/              <- MODULE 1 (today)
+│   │   ├── downloader.py        # tarball, not zip
+│   │   ├── extractor.py         # tar.gz extraction + flatten
+│   │   ├── detector.py          # language/framework/manifest detection
+│   │   ├── analyzer.py          # orchestrates static analysis, no LLM
+│   │   ├── setup_generator.py   # rule-based baseline guide
+│   │   └── cleanup.py
+│   │
+│   ├── parser/
+│   │   ├── ast_parser.py        # skeleton + function-body slicing (Python only)
+│   │   ├── import_map.py        # RENAMED from import_graph.py, scope narrowed
+│   │   └── config_parser.py
+│   │   # REMOVED: symbol_index.py, call_graph.py
+│   │
+│   ├── context/
+│   │   ├── manager.py           # stable prefix + compaction trigger
+│   │   ├── skeleton.py
+│   │   ├── function_loader.py   # MERGED: absorbs old symbol_loader.py
+│   │   ├── file_loader.py       # non-Python raw-file fallback
+│   │   └── working_set.py
+│   │   # REMOVED: symbol_loader.py (merged above)
+│   │
+│   ├── llm/
+│   │   ├── gemini.py
+│   │   ├── tools.py             # exactly two tool schemas
+│   │   └── token_counter.py
+│   │
+│   ├── cache/
+│   │   ├── redis_client.py
+│   │   ├── session_cache.py     # LRU, 50MB threshold
+│   │   └── compression.py
+│   │
+│   ├── templates/  (unchanged — HTML/Jinja2, no React)
+│   ├── static/     (unchanged — vanilla CSS/JS)
+│   │
+│   └── utils/
+│       ├── filesystem.py
+│       ├── github.py
+│       ├── logger.py
+│       └── helpers.py
+│
+├── workspaces/<session_id>/
+├── logs/
+├── tests/
+├── .env / requirements.txt / Dockerfile / docker-compose.yml / README.md / .gitignore
